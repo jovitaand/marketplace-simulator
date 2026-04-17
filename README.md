@@ -1,4 +1,4 @@
-# MarketSphere Simulator
+# Marketplace simulator
 
 MarketSphere is a front-end simulation of a social commerce marketplace inspired by platforms like Facebook Marketplace. It is designed as a demo environment for testing how product discovery, seller trust, buyer messaging, and lightweight ad optimization can work together inside one marketplace experience.
 
