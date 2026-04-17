@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MarketSphere Simulator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="hero">
+      <div class="hero__copy">
+        <p class="eyebrow">Marketplace + Marketing Sandbox</p>
+        <h1>Build, test, and grow a social commerce platform.</h1>
+        <p class="hero__text">
+          MarketSphere simulates a Facebook Marketplace style environment with listings,
+          conversations, ad boosts, funnel metrics, and seller reputation signals.
+        </p>
+        <div class="hero__cta">
+          <button id="boostTopSeller" class="button button--primary">Boost Top Seller</button>
+          <button id="cycleAudience" class="button button--ghost">Rotate Audience</button>
+        </div>
+      </div>
+      <section class="hero__stats" aria-label="Platform summary">
+        <article class="stat-card">
+          <span>Active shoppers</span>
+          <strong id="activeShoppers">18,240</strong>
+        </article>
+        <article class="stat-card">
+          <span>Campaign ROAS</span>
+          <strong id="platformRoas">4.8x</strong>
+        </article>
+        <article class="stat-card">
+          <span>Messages today</span>
+          <strong id="messageCount">1,284</strong>
+        </article>
+      </section>
+    </header>
+
+    <main class="dashboard">
+      <section class="panel storefront">
+        <div class="panel__header">
+          <div>
+            <p class="panel__eyebrow">Storefront</p>
+            <h2>Marketplace feed</h2>
+          </div>
+          <label class="search">
+            <span class="sr-only">Search listings</span>
+            <input id="searchInput" type="search" placeholder="Search listings, sellers, or keywords">
+          </label>
+        </div>
+
+        <div class="filters">
+          <div class="filter-group" id="categoryFilters"></div>
+          <label class="toggle">
+            <input id="sponsoredOnly" type="checkbox">
+            <span>Sponsored only</span>
+          </label>
+        </div>
+
+        <div id="listingGrid" class="listing-grid" aria-live="polite"></div>
+      </section>
+
+      <aside class="stack">
+        <section class="panel">
+          <div class="panel__header">
+            <div>
+              <p class="panel__eyebrow">Campaign Lab</p>
+              <h2>Audience tuning</h2>
+            </div>
+          </div>
+          <form id="campaignForm" class="campaign-form">
+            <label>
+              Daily budget
+              <input id="budgetInput" type="range" min="20" max="300" step="10" value="120">
+              <output id="budgetOutput">$120</output>
+            </label>
+            <label>
+              Objective
+              <select id="objectiveSelect">
+                <option value="messages">Messages</option>
+                <option value="sales">Sales</option>
+                <option value="awareness">Awareness</option>
+              </select>
+            </label>
+            <label>
+              Audience
+              <select id="audienceSelect">
+                <option value="local-families">Local Families</option>
+                <option value="students">Students</option>
+                <option value="collectors">Collectors</option>
+                <option value="home-upgraders">Home Upgraders</option>
+              </select>
+            </label>
+            <button class="button button--primary" type="submit">Run simulation</button>
+          </form>
+
+          <div class="metric-grid">
+            <article class="metric-card">
+              <span>Projected reach</span>
+              <strong id="projectedReach">26,500</strong>
+            </article>
+            <article class="metric-card">
+              <span>CTR</span>
+              <strong id="projectedCtr">3.1%</strong>
+            </article>
+            <article class="metric-card">
+              <span>Estimated leads</span>
+              <strong id="projectedLeads">214</strong>
+            </article>
+            <article class="metric-card">
+              <span>Cost / lead</span>
+              <strong id="projectedCpl">$0.56</strong>
+            </article>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel__header">
+            <div>
+              <p class="panel__eyebrow">Seller Console</p>
+              <h2>Reputation and funnel health</h2>
+            </div>
+          </div>
+          <div id="sellerBoard" class="seller-board"></div>
+        </section>
+
+        <section class="panel">
+          <div class="panel__header">
+            <div>
+              <p class="panel__eyebrow">Inbox Simulation</p>
+              <h2>Buyer messages</h2>
+            </div>
+          </div>
+          <div id="messagePanel" class="message-panel"></div>
+        </section>
+      </aside>
+    </main>
+  </div>
+
+  <template id="listingTemplate">
+    <article class="listing-card">
+      <div class="listing-card__image"></div>
+      <div class="listing-card__content">
+        <div class="listing-card__topline">
+          <span class="pill pill--category"></span>
+          <span class="pill pill--sponsored">Sponsored</span>
+        </div>
+        <h3></h3>
+        <p class="listing-card__price"></p>
+        <p class="listing-card__meta"></p>
+        <p class="listing-card__blurb"></p>
+        <div class="listing-card__footer">
+          <div class="seller-mini"></div>
+          <button class="button button--small">Message seller</button>
+        </div>
+      </div>
+    </article>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>
