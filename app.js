@@ -130,6 +130,7 @@ const campaignForm = document.querySelector("#campaignForm");
 
 const categories = ["All", ...new Set(listings.map((listing) => listing.category))];
 
+// Formats numeric values as whole-dollar USD prices for cards and controls.
 function formatCurrency(value) {
   return new Intl.NumberFormat("en-US", {
     style: "currency",
@@ -138,6 +139,7 @@ function formatCurrency(value) {
   }).format(value);
 }
 
+// Applies the current search, category, and sponsorship filters to the listing set.
 function getFilteredListings() {
   return listings.filter((listing) => {
     const categoryMatch = state.category === "All" || listing.category === state.category;
@@ -150,6 +152,7 @@ function getFilteredListings() {
   });
 }
 
+// Builds the category chip row and keeps the active filter visually in sync with state.
 function renderCategories() {
   categoryFilters.innerHTML = "";
   categories.forEach((category) => {
@@ -166,6 +169,7 @@ function renderCategories() {
   });
 }
 
+// Renders marketplace cards based on the current filters and wires up seller messaging.
 function renderListings() {
   listingGrid.innerHTML = "";
   const filteredListings = getFilteredListings();
@@ -218,6 +222,7 @@ function renderListings() {
   });
 }
 
+// Converts listing performance into seller momentum cards for the reputation panel.
 function renderSellerBoard() {
   sellerBoard.innerHTML = "";
   const sellers = listings.map((listing) => {
@@ -252,6 +257,7 @@ function renderSellerBoard() {
     });
 }
 
+// Repaints the inbox simulation with the latest buyer and system-generated messages.
 function renderMessages() {
   messagePanel.innerHTML = "";
   state.messages.forEach((message) => {
@@ -269,6 +275,7 @@ function renderMessages() {
   });
 }
 
+// Refreshes the top-level platform summary using the current campaign and inbox state.
 function updateHeroStats() {
   const shoppers = 18000 + state.budget * 7 + (state.audience === "students" ? 900 : 0);
   const roasBase = state.objective === "sales" ? 5.4 : state.objective === "awareness" ? 3.6 : 4.8;
@@ -279,6 +286,7 @@ function updateHeroStats() {
   document.querySelector("#messageCount").textContent = (1240 + state.messages.length * 19).toLocaleString();
 }
 
+// Calculates projected campaign performance metrics from the selected audience, goal, and budget.
 function updateCampaignMetrics() {
   const profile = campaignProfiles[state.audience];
   const objectiveMultiplier =
@@ -295,6 +303,7 @@ function updateCampaignMetrics() {
   updateHeroStats();
 }
 
+// Cycles through predefined audiences to simulate quick testing of targeting segments.
 function rotateAudience() {
   const keys = Object.keys(campaignProfiles);
   const nextIndex = (keys.indexOf(state.audience) + 1) % keys.length;
